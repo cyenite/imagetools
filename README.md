@@ -4,6 +4,7 @@
 
 ![ImageTools.xyz](https://via.placeholder.com/1200x600/2563eb/ffffff?text=ImageTools.xyz)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/de09933a-d12e-40ef-bd92-a7c48c7723ba/deploy-status)](https://app.netlify.com/sites/imagetoolz/deploys)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.x-blue)](https://reactjs.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.x-38bdf8)](https://tailwindcss.com/)
