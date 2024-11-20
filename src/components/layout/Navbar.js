@@ -35,20 +35,6 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {/* <Link
-              to="/features"
-              className={`transition-colors ${scrolled
-                  ? 'text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'
-                  : 'text-white/90 hover:text-white'
-                }`}
-            >
-              Features
-            </Link> */}
-
-          </div>
-
           {/* Right Side Items */}
           <div className="flex items-center space-x-4">
             <Link
@@ -61,7 +47,7 @@ const Navbar = () => {
               Pricing
             </Link>
             <a
-              href="https://github.com/yourusername/imagetools"
+              href="https://github.com/cyenite/imagetools"
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full transition-all ${scrolled
