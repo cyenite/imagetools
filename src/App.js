@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
-import { useTheme } from './context/ThemeContext';
 import Home from './components/pages/Home';
 // Conversion tools
 import HeicConverter from './components/categories/conversion/HeicConverter';
 import ImageToPdf from './components/categories/conversion/ImageToPdf';
-import PdfToImage from './components/categories/conversion/PdfToImage';
+import PdfToImage from './components/categories/conversion/ImageToPdf';
 import ImageToSvg from './components/categories/conversion/ImageToSvg';
 import SvgToRaster from './components/categories/conversion/SvgToRaster';
 // Resize tools
@@ -18,7 +17,6 @@ import Navbar from './components/layout/Navbar';
 import Pricing from './components/pages/Pricing';
 
 function AppContent() {
-  const { theme } = useTheme();
 
   return (
     <div className="App">
@@ -31,7 +29,6 @@ function AppContent() {
           {/* Conversion Tools Routes */}
           <Route path="/categories/conversion/heic-converter" element={<HeicConverter />} />
           <Route path="/categories/conversion/image-to-pdf" element={<ImageToPdf />} />
-          <Route path="/categories/conversion/pdf-to-image" element={<PdfToImage />} />
           <Route path="/categories/conversion/image-to-svg" element={<ImageToSvg />} />
           <Route path="/categories/conversion/svg-to-raster" element={<SvgToRaster />} />
 

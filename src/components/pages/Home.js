@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   FiImage, FiCrop, FiZap, FiEdit2, FiGrid, FiLayers,
-  FiPenTool, FiBox, FiTool, FiRefreshCw, FiCommand,
-  FiCpu, FiSearch, FiArrowRight, FiGithub, FiStar
+  FiPenTool, FiBox, FiTool, FiRefreshCw, FiSearch, FiArrowRight, FiGithub, FiStar
 } from 'react-icons/fi';
 
 const Home = () => {
@@ -19,7 +18,6 @@ const Home = () => {
       tools: [
         { name: "HEIC Converter", path: "/categories/conversion/heic-converter", available: true },
         { name: "Image to PDF", path: "/categories/conversion/image-to-pdf", available: true, isPremium: true },
-        { name: "PDF to Image", path: "/categories/conversion/pdf-to-image", available: true },
         { name: "Image to SVG", path: "/categories/conversion/image-to-svg", available: true, isPremium: true },
         { name: "SVG to PNG/JPG", path: "/categories/conversion/svg-to-raster", available: true, isPremium: true },
       ]
