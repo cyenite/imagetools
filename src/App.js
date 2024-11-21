@@ -49,34 +49,32 @@ function AppContent() {
 
   return (
     <div className="App">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/api/docs" element={<APIDocs />} />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/api/docs" element={<APIDocs />} />
 
-          {/* Conversion Tools Routes */}
-          <Route path="/categories/conversion" element={<ConversionTools />} />
-          <Route path="/categories/conversion/heic-converter" element={<HeicConverter />} />
-          <Route path="/categories/conversion/format-converter" element={<FormatConverter />} />
-          <Route path="/categories/conversion/image-to-pdf" element={<ImageToPdf />} />
-          <Route path="/categories/conversion/svg-to-raster" element={<SvgToRaster />} />
+        {/* Conversion Tools Routes */}
+        <Route path="/categories/conversion" element={<ConversionTools />} />
+        <Route path="/categories/conversion/heic-converter" element={<HeicConverter />} />
+        <Route path="/categories/conversion/format-converter" element={<FormatConverter />} />
+        <Route path="/categories/conversion/image-to-pdf" element={<ImageToPdf />} />
+        <Route path="/categories/conversion/svg-to-raster" element={<SvgToRaster />} />
 
-          {/* Resizing Tools Routes */}
-          <Route path="/categories/resize" element={<ResizeTools />} />
-          <Route path="/categories/resize/grid-cropper" element={<GridCropper />} />
-          <Route path="/categories/resize/batch-resize" element={<BatchResizer />} />
-          <Route path="/categories/resize/crop-circle" element={<CircleCropper />} />
-          <Route path="/categories/resize/aspect-ratio" element={<AspectRatioCalculator />} />
+        {/* Resizing Tools Routes */}
+        <Route path="/categories/resize" element={<ResizeTools />} />
+        <Route path="/categories/resize/grid-cropper" element={<GridCropper />} />
+        <Route path="/categories/resize/batch-resize" element={<BatchResizer />} />
+        <Route path="/categories/resize/crop-circle" element={<CircleCropper />} />
+        <Route path="/categories/resize/aspect-ratio" element={<AspectRatioCalculator />} />
 
-          {/* Optimization Tools Routes */}
-          <Route path="/categories/optimize" element={<OptimizationTools />} />
-          <Route path="/categories/optimize/compress" element={<ImageCompressor />} />
-          <Route path="/categories/optimize/exif" element={<ExifExtractor />} />
-          <Route path="/categories/optimize/dpi" element={<DpiChanger />} />
-        </Routes>
-      </Router>
+        {/* Optimization Tools Routes */}
+        <Route path="/categories/optimize" element={<OptimizationTools />} />
+        <Route path="/categories/optimize/compress" element={<ImageCompressor />} />
+        <Route path="/categories/optimize/exif" element={<ExifExtractor />} />
+        <Route path="/categories/optimize/dpi" element={<DpiChanger />} />
+      </Routes>
     </div>
   );
 }
@@ -99,7 +97,9 @@ function App() {
         reverseOrder={false}
       />
       <ThemeProvider>
-        <AppContent />
+        <Router>
+          <AppContent />
+        </Router>
       </ThemeProvider>
     </>
   );
