@@ -46,6 +46,15 @@ const Navbar = () => {
             >
               Pricing
             </Link>
+            <Link
+              to="/api/docs"
+              className={`transition-colors ${scrolled
+                ? 'text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'
+                : 'text-white/90 hover:text-white'
+                }`}
+            >
+              API
+            </Link>
             <a
               href="https://github.com/cyenite/imagetools"
               target="_blank"

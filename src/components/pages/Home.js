@@ -238,7 +238,6 @@ const Home = () => {
               <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Product</h4>
               <ul className="space-y-2">
                 <li><Link to="/pricing" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">Pricing</Link></li>
-                <li><Link to="/features" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">Features</Link></li>
                 <li><Link to="/changelog" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">Changelog</Link></li>
               </ul>
             </div>
@@ -246,8 +245,8 @@ const Home = () => {
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Resources</h4>
               <ul className="space-y-2">
-                <li><Link to="/docs" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">Documentation</Link></li>
-                <li><Link to="/api" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">API</Link></li>
+                <li><Link to="/api/docs" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">Documentation</Link></li>
+                <li><Link to="/api/playground" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">API Playground</Link></li>
                 <li><Link to="/blog" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">Blog</Link></li>
               </ul>
             </div>
@@ -265,7 +264,7 @@ const Home = () => {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-600 dark:text-gray-400">© 2024 Cyenite. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="https://github.com" className="text-gray-400 hover:text-gray-500" aria-label="GitHub">
+                <a href="https://github.com/cyenite/imagetools" className="text-gray-400 hover:text-gray-500" aria-label="GitHub">
                   <FiGithub className="w-6 h-6" />
                 </a>
               </div>

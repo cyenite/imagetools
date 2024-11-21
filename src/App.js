@@ -10,6 +10,7 @@ import Navbar from './components/layout/Navbar';
 // Page Components
 import Home from './components/pages/Home';
 import Pricing from './components/pages/Pricing';
+import APIDocs from './components/pages/APIDocs';
 
 // Category Pages
 import ConversionTools from './components/categories/conversion/ConversionTools';
@@ -38,6 +39,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/api/docs" element={<APIDocs />} />
 
           {/* Conversion Tools Routes */}
           <Route path="/categories/conversion" element={<ConversionTools />} />
