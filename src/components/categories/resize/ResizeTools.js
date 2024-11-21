@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import GridCropper from './GridCropper';
 import AspectRatioCalculator from './AspectRatioCalculator';
-import ImageCompressor from './ImageCompressor';
 import BatchResizer from './BatchResizer';
 import CircleCropper from './CircleCropper';
 
@@ -14,31 +13,25 @@ const ResizeTools = () => {
             title: "Grid Cropper",
             description: "Crop images in a grid",
             icon: "📏",
-            to: "grid"
+            to: "grid-cropper"
         },
         {
-            title: "Aspect Ratio Calculator",
-            description: "Calculate and resize with perfect ratios",
-            icon: "📐",
-            to: "aspect"
-        },
-        {
-            title: "Image Compressor",
-            description: "Compress images while maintaining quality",
-            icon: "🗜️",
-            to: "compress"
-        },
-        {
-            title: "Batch Resizer",
+            title: "Batch Resize",
             description: "Resize multiple images at once",
             icon: "📦",
-            to: "batch"
+            to: "batch-resize"
         },
         {
-            title: "Circle Cropper",
+            title: "Crop Circle",
             description: "Crop images into perfect circles",
             icon: "⭕",
-            to: "circle"
+            to: "crop-circle"
+        },
+        {
+            title: "Aspect Ratio",
+            description: "Calculate and resize with perfect ratios",
+            icon: "📐",
+            to: "aspect-ratio"
         }
     ];
 
@@ -48,13 +41,29 @@ const ResizeTools = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
-            <div className="max-w-6xl mx-auto">
+        <div className="min-h-screen bg-white dark:bg-gray-900 pt-16 relative">
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-gray-900/50 to-transparent dark:from-gray-950/50 pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-[50vh] pointer-events-none">
+                <div className="absolute inset-0 opacity-20">
+                    <div className="absolute -top-48 -left-48 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
+                    <div className="absolute -top-48 -right-48 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
+                    <div className="absolute top-[-20vh] left-[20vw] w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
+                </div>
+                <div
+                    className="absolute inset-0 opacity-50 dark:opacity-40"
+                    style={{
+                        backgroundImage: `radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.3) 2px, transparent 0)`,
+                        backgroundSize: '32px 32px'
+                    }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-gray-900/50 dark:to-gray-900" />
+            </div>
+
+            <div className="container mx-auto px-4 py-24 relative">
                 <h1 className="text-4xl font-bold text-slate-800 mb-8 text-center">
-                    Image Resize Tools
+                    Image Resizing Tools
                 </h1>
 
-                {/* Search Bar */}
                 <div className="mb-8 max-w-md mx-auto">
                     <div className="relative">
                         <input
@@ -75,7 +84,7 @@ const ResizeTools = () => {
                 <div className="tool-grid">
                     <Routes>
                         <Route index element={
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {filteredTools.map((tool, index) => (
                                     <ToolCard
                                         key={index}
@@ -89,11 +98,10 @@ const ResizeTools = () => {
                                 )}
                             </div>
                         } />
-                        <Route path="grid" element={<GridCropper />} />
-                        <Route path="aspect" element={<AspectRatioCalculator />} />
-                        <Route path="compress" element={<ImageCompressor />} />
-                        <Route path="batch" element={<BatchResizer />} />
-                        <Route path="circle" element={<CircleCropper />} />
+                        <Route path="grid-cropper" element={<GridCropper />} />
+                        <Route path="batch-resize" element={<BatchResizer />} />
+                        <Route path="crop-circle" element={<CircleCropper />} />
+                        <Route path="aspect-ratio" element={<AspectRatioCalculator />} />
                     </Routes>
                 </div>
             </div>

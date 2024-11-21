@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 // Context
 import { ThemeProvider } from './context/ThemeContext';
@@ -47,7 +48,7 @@ function AppContent() {
 
           {/* Resizing Tools Routes */}
           <Route path="/categories/resize" element={<ResizeTools />} />
-          <Route path="/categories/resize/photo-cropper" element={<GridCropper />} />
+          <Route path="/categories/resize/grid-cropper" element={<GridCropper />} />
           <Route path="/categories/resize/image-compressor" element={<ImageCompressor />} />
           <Route path="/categories/resize/batch-resize" element={<BatchResizer />} />
           <Route path="/categories/resize/crop-circle" element={<CircleCropper />} />
@@ -60,9 +61,25 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
+    <>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          className: '',
+          style: {
+            maxWidth: '500px',
+          },
+        }}
+        gutter={12}
+        containerStyle={{
+          bottom: 40,
+        }}
+        reverseOrder={false}
+      />
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
+    </>
   );
 }
 

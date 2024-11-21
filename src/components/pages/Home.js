@@ -4,6 +4,7 @@ import {
   FiImage, FiCrop, FiZap, FiEdit2, FiGrid, FiLayers,
   FiPenTool, FiBox, FiTool, FiRefreshCw, FiSearch, FiArrowRight, FiGithub, FiStar
 } from 'react-icons/fi';
+import { toast } from 'react-hot-toast';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -25,9 +26,9 @@ const Home = () => {
     {
       title: "Resizing Tools",
       icon: <FiCrop />,
-      path: "/resizing",
+      path: "/resize",
       tools: [
-        { name: "Grid Cropper", path: "/categories/resize/photo-cropper", available: false, isPremium: true },
+        { name: "Grid Cropper", path: "/categories/resize/grid-cropper", available: true },
         { name: "Batch Resizer", path: "/categories/resize/batch-resize", available: false, isPremium: true },
         { name: "Crop to Circle", path: "/categories/resize/crop-circle", available: false, isPremium: true },
         { name: "Aspect Ratio Calculator", path: "/categories/resize/aspect-ratio", available: false },
@@ -37,7 +38,7 @@ const Home = () => {
       title: "Optimization",
       icon: <FiZap />,
       tools: [
-        { name: "Image Compressor", path: "/compress", available: true, isPremium: true },
+        { name: "Image Compressor", path: "/compress", available: false, isPremium: true },
         { name: "Image Optimizer", path: "/optimize", available: false, isPremium: true },
         { name: "Quality Analyzer", path: "/analyze", available: false, isPremium: true },
         { name: "DPI Changer", path: "/dpi", available: false, isPremium: true },
@@ -158,6 +159,31 @@ const Home = () => {
     )
   );
 
+  const handleCategoryClick = (category) => {
+    const hasAvailableTools = category.tools.some(tool => tool.available);
+
+    if (!hasAvailableTools) {
+      toast(`${category.title} category is under active development`, {
+        duration: 3000,
+        style: {
+          background: 'rgba(0, 0, 0, 0.8)',
+          color: '#fff',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          borderRadius: '12px',
+          padding: '12px 24px',
+          fontSize: '0.875rem',
+          boxShadow: '0 8px 16px rgba(0, 0, 0, 0.12)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+        },
+        icon: '🚧',
+      });
+      return;
+    }
+
+    navigate(`/categories${category.path}`);
+  };
+
   return (
     <div className="min-h-screen bg-[#f8fafc] dark:bg-gray-900">
       {/* Hero Section */}
@@ -193,8 +219,9 @@ const Home = () => {
           {filteredCategories.map((category) => (
             <div
               key={category.title}
-              onClick={() => navigate(`/categories${category.path}`)}
-              className="group bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 cursor-pointer"
+              onClick={() => handleCategoryClick(category)}
+              className={`group bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 ${category.tools.some(tool => tool.available) ? 'cursor-pointer' : 'cursor-not-allowed opacity-75'
+                }`}
             >
               {/* Card Header - More compact and modern */}
               <div className="p-4 border-b border-gray-100 dark:border-gray-700">
@@ -211,7 +238,30 @@ const Home = () => {
               {/* Tools List - Modern compact layout */}
               <div className="p-2">
                 {category.tools.map((tool) => (
-                  <div key={tool.name} className="text-sm">
+                  <div
+                    key={tool.name}
+                    className="text-sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!tool.available) {
+                        toast(`${tool.name} is coming soon!`, {
+                          duration: 3000,
+                          style: {
+                            background: 'rgba(0, 0, 0, 0.8)',
+                            color: '#fff',
+                            backdropFilter: 'blur(8px)',
+                            WebkitBackdropFilter: 'blur(8px)',
+                            borderRadius: '12px',
+                            padding: '12px 24px',
+                            fontSize: '0.875rem',
+                            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.12)',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                          },
+                          icon: '🚧',
+                        });
+                      }
+                    }}
+                  >
                     {tool.available ? (
                       <Link
                         to={tool.path}
@@ -227,7 +277,7 @@ const Home = () => {
                         <FiArrowRight className="w-4 h-4 text-blue-500 opacity-0 group-hover/tool:opacity-100 transition-opacity flex-shrink-0 ml-2" />
                       </Link>
                     ) : (
-                      <div className="flex items-center justify-between px-2 py-1.5">
+                      <div className="flex items-center justify-between px-2 py-1.5 cursor-not-allowed">
                         <span className="text-gray-400 dark:text-gray-500 truncate mr-2">
                           {tool.name}
                         </span>
