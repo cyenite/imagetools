@@ -37,7 +37,7 @@ import BatchResizer from './components/categories/resize/BatchResizer';
 import CircleCropper from './components/categories/resize/CircleCropper';
 import AspectRatioCalculator from './components/categories/resize/AspectRatioCalculator';
 
-// Initialize GA4 with your measurement ID
+// GA4 measurement ID
 ReactGA.initialize('G-SHY4VGPCW1');
 
 function AppContent() {
