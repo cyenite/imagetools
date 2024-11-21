@@ -1,3 +1,6 @@
+import ReactGA from 'react-ga4';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
@@ -34,8 +37,15 @@ import BatchResizer from './components/categories/resize/BatchResizer';
 import CircleCropper from './components/categories/resize/CircleCropper';
 import AspectRatioCalculator from './components/categories/resize/AspectRatioCalculator';
 
+// Initialize GA4 with your measurement ID
+ReactGA.initialize('G-SHY4VGPCW1');
 
 function AppContent() {
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: location.pathname });
+  }, [location]);
 
   return (
     <div className="App">
