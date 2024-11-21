@@ -15,6 +15,7 @@ import APIDocs from './components/pages/APIDocs';
 // Category Pages
 import ConversionTools from './components/categories/conversion/ConversionTools';
 import ResizeTools from './components/categories/resize/ResizeTools';
+import OptimizationTools from './components/categories/optimization/OptimizationTools';
 
 // Conversion Tools
 import HeicConverter from './components/categories/conversion/HeicConverter';
@@ -22,9 +23,13 @@ import ImageToPdf from './components/categories/conversion/ImageToPdf';
 import SvgToRaster from './components/categories/conversion/SvgToRaster';
 import FormatConverter from './components/categories/conversion/FormatConverter';
 
+// Optimization Tools
+import ImageCompressor from './components/categories/optimization/ImageCompressor';
+import ExifExtractor from './components/categories/optimization/ExifExtractor';
+import DpiChanger from './components/categories/optimization/DpiChanger';
+
 // Resize Tools
 import GridCropper from './components/categories/resize/GridCropper';
-import ImageCompressor from './components/categories/resize/ImageCompressor';
 import BatchResizer from './components/categories/resize/BatchResizer';
 import CircleCropper from './components/categories/resize/CircleCropper';
 import AspectRatioCalculator from './components/categories/resize/AspectRatioCalculator';
@@ -51,10 +56,15 @@ function AppContent() {
           {/* Resizing Tools Routes */}
           <Route path="/categories/resize" element={<ResizeTools />} />
           <Route path="/categories/resize/grid-cropper" element={<GridCropper />} />
-          <Route path="/categories/resize/image-compressor" element={<ImageCompressor />} />
           <Route path="/categories/resize/batch-resize" element={<BatchResizer />} />
           <Route path="/categories/resize/crop-circle" element={<CircleCropper />} />
           <Route path="/categories/resize/aspect-ratio" element={<AspectRatioCalculator />} />
+
+          {/* Optimization Tools Routes */}
+          <Route path="/categories/optimize" element={<OptimizationTools />} />
+          <Route path="/categories/optimize/compress" element={<ImageCompressor />} />
+          <Route path="/categories/optimize/exif" element={<ExifExtractor />} />
+          <Route path="/categories/optimize/dpi" element={<DpiChanger />} />
         </Routes>
       </Router>
     </div>

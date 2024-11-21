@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import ImageCompressor from './ImageCompressor';
-import ImageOptimizer from './ImageOptimizer';
-import QualityAnalyzer from './QualityAnalyzer';
+import ImageOptimizer from './ExifExtractor';
+import QualityAnalyzer from './DpiChanger';
 
-const CompressionTools = () => {
+const OptimizationTools = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const tools = [
@@ -12,19 +12,19 @@ const CompressionTools = () => {
             title: "Image Compressor",
             description: "Compress images without losing quality",
             icon: "🗜️",
-            to: "compress"
+            to: "/categories/optimize/compress"
         },
         {
             title: "Image Optimizer",
             description: "Optimize images for web performance",
             icon: "⚡",
-            to: "optimize"
+            to: "/categories/optimize/optimize"
         },
         {
             title: "Quality Analyzer",
             description: "Analyze and compare image quality",
             icon: "📊",
-            to: "analyze"
+            to: "/categories/optimize/analyze"
         }
     ];
 
@@ -34,10 +34,26 @@ const CompressionTools = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
-            <div className="max-w-6xl mx-auto">
+        <div className="min-h-screen bg-white dark:bg-gray-900 pt-16 relative">
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-gray-900/50 to-transparent dark:from-gray-950/50 pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-[50vh] pointer-events-none">
+                <div className="absolute inset-0 opacity-20">
+                    <div className="absolute -top-48 -left-48 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
+                    <div className="absolute -top-48 -right-48 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
+                    <div className="absolute top-[-20vh] left-[20vw] w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
+                </div>
+                <div
+                    className="absolute inset-0 opacity-50 dark:opacity-40"
+                    style={{
+                        backgroundImage: `radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.3) 2px, transparent 0)`,
+                        backgroundSize: '32px 32px'
+                    }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-gray-900/50 dark:to-gray-900" />
+            </div>
+            <div className="container mx-auto px-4 py-24 relative">
                 <h1 className="text-4xl font-bold text-slate-800 mb-8 text-center">
-                    Image Compression Tools
+                    Image Optimization Tools
                 </h1>
 
                 {/* Search Bar */}
@@ -75,9 +91,9 @@ const CompressionTools = () => {
                                 )}
                             </div>
                         } />
-                        <Route path="compress" element={<ImageCompressor />} />
-                        <Route path="optimize" element={<ImageOptimizer />} />
-                        <Route path="analyze" element={<QualityAnalyzer />} />
+                        <Route path="/categories/optimize/compress" element={<ImageCompressor />} />
+                        <Route path="/categories/optimize/optimize" element={<ImageOptimizer />} />
+                        <Route path="/categories/optimize/analyze" element={<QualityAnalyzer />} />
                     </Routes>
                 </div>
             </div>
@@ -96,4 +112,4 @@ const ToolCard = ({ title, description, icon, to }) => (
     </Link>
 );
 
-export default CompressionTools; 
+export default OptimizationTools; 

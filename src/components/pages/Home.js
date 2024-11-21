@@ -37,10 +37,11 @@ const Home = () => {
     {
       title: "Optimization",
       icon: <FiZap />,
+      path: "/optimize",
       tools: [
-        { name: "Image Compressor", path: "/compress", available: false, isPremium: true },
-        { name: "Image Optimizer", path: "/optimize", available: false, isPremium: true },
-        { name: "DPI Changer", path: "/dpi", available: false, isPremium: true },
+        { name: "Image Compressor", path: "/categories/optimize/compress", available: true, isPremium: true },
+        { name: "Exif Extractor", path: "/categories/optimize/exif", available: true, isPremium: true },
+        { name: "DPI Changer", path: "/categories/optimize/dpi", available: false, isPremium: true },
       ]
     },
     {
