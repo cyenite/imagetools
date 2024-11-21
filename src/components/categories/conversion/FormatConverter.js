@@ -141,7 +141,7 @@ const FormatConverter = () => {
                 ));
             }
         });
-    }, [selectedFormat]);
+    }, [convertImage, formatOptions, selectedFormat]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,

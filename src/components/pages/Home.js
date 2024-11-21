@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  FiImage, FiCrop, FiZap, FiEdit2, FiGrid, FiLayers,
-  FiPenTool, FiBox, FiTool, FiRefreshCw, FiSearch, FiArrowRight, FiGithub, FiStar
+  FiImage, FiCrop, FiZap, FiEdit2, FiLayers,
+  FiPenTool, FiRefreshCw, FiSearch, FiArrowRight, FiGithub, FiStar
 } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 
@@ -40,7 +40,6 @@ const Home = () => {
       tools: [
         { name: "Image Compressor", path: "/compress", available: false, isPremium: true },
         { name: "Image Optimizer", path: "/optimize", available: false, isPremium: true },
-        { name: "Quality Analyzer", path: "/analyze", available: false, isPremium: true },
         { name: "DPI Changer", path: "/dpi", available: false, isPremium: true },
       ]
     },
@@ -48,44 +47,18 @@ const Home = () => {
       title: "Enhancement",
       icon: <FiEdit2 />,
       tools: [
-        { name: "Background Remover", path: "/remove-bg", available: false },
-        { name: "Image Enhancer", path: "/enhance", available: false },
-        { name: "Blur/Unblur Tool", path: "/blur", available: false },
-        { name: "Sharpening Tool", path: "/sharpen", available: false },
-        { name: "Red-Eye Remover", path: "/red-eye", available: false },
-      ]
-    },
-    {
-      title: "Color Effects",
-      icon: <FiPenTool />,
-      tools: [
-        { name: "Color Inverter", path: "/invert", available: false },
-        { name: "Grayscale Converter", path: "/grayscale", available: false },
-        { name: "Sepia Converter", path: "/sepia", available: false },
-        { name: "Image Colorizer", path: "/colorize", available: false },
-        { name: "Color Palette Generator", path: "/palette", available: false },
-        { name: "Image Recoloring", path: "/recolor", available: false },
-      ]
-    },
-    {
-      title: "Artistic Effects",
-      icon: <FiBox />,
-      tools: [
-        { name: "Cartoonizer", path: "/cartoonize", available: false },
-        { name: "Pixelator", path: "/pixelate", available: false },
-        { name: "ASCII Art Converter", path: "/ascii", available: false },
-        { name: "Sketch Converter", path: "/sketch", available: false },
-        { name: "Silhouette Maker", path: "/silhouette", available: false },
-        { name: "Outline Generator", path: "/outline", available: false },
+        { name: "Background Remover", path: "/remove-bg", available: false, isPremium: true },
+        { name: "Image Enhancer", path: "/enhance", available: false, isPremium: true },
+        { name: "Blur/Unblur Tool", path: "/blur", available: false, isPremium: true },
       ]
     },
     {
       title: "Batch Processing",
       icon: <FiLayers />,
       tools: [
-        { name: "Batch Processor", path: "/batch", available: false },
-        { name: "Batch Renamer", path: "/rename", available: false },
-        { name: "Batch Format Converter", path: "/batch-convert", available: false },
+        { name: "Batch Processor", path: "/batch", available: false, isPremium: true },
+        { name: "Batch Renamer", path: "/rename", available: false, isPremium: true },
+        { name: "Batch Format Converter", path: "/batch-convert", available: false, isPremium: true },
       ]
     },
     {
@@ -93,35 +66,8 @@ const Home = () => {
       icon: <FiPenTool />,
       tools: [
         { name: "Watermarker", path: "/watermark", available: false },
-        { name: "Annotation Tool", path: "/annotate", available: false },
-        { name: "Image Captioner", path: "/caption", available: false },
-        { name: "Screenshot Tool", path: "/screenshot", available: false },
-      ]
-    },
-    {
-      title: "Graphics & Design",
-      icon: <FiGrid />,
-      tools: [
-        { name: "Logo Maker", path: "/logo", available: false },
-        { name: "Favicon Generator", path: "/favicon", available: false },
-        { name: "Icon Resizer", path: "/icon-resize", available: false },
-        { name: "Frame Generator", path: "/frame", available: false },
-        { name: "Template Maker", path: "/template", available: false },
-        { name: "3D Image Creator", path: "/3d", available: false },
-        { name: "Animated Text Generator", path: "/animated-text", available: false },
-      ]
-    },
-    {
-      title: "Advanced Tools",
-      icon: <FiTool />,
-      tools: [
-        { name: "Metadata Viewer/Editor", path: "/metadata", available: false },
-        { name: "Metadata Remover", path: "/remove-metadata", available: false },
-        { name: "Hash Generator", path: "/hash", available: false },
-        { name: "Steganography Tool", path: "/steganography", available: false },
-        { name: "Image Analyzer", path: "/analyze-image", available: false },
-        { name: "Image Comparator", path: "/compare", available: false },
-        { name: "Image Upscaler", path: "/upscale", available: false },
+        { name: "Annotation Tool", path: "/annotate", available: false, isPremium: true },
+        { name: "Image Captioner", path: "/caption", available: false, isPremium: true },
       ]
     },
     {
@@ -129,27 +75,11 @@ const Home = () => {
       icon: <FiImage />,
       tools: [
         { name: "Meme Generator", path: "/meme", available: false },
-        { name: "Collage Maker", path: "/collage", available: false },
-        { name: "Thumbnail Maker", path: "/thumbnail", available: false },
+        { name: "Collage Maker", path: "/collage", available: false, isPremium: true },
+        { name: "Thumbnail Maker", path: "/thumbnail", available: false, isPremium: true },
         { name: "QR Code Generator", path: "/qr", available: false },
-        { name: "Barcode Generator", path: "/barcode", available: false },
-        { name: "Photo ID Maker", path: "/photo-id", available: false },
       ]
     },
-    {
-      title: "AI & Advanced Features",
-      icon: <FiZap />,
-      path: "/ai-features",
-      isPremium: true,
-      tools: [
-        { name: "Face Swapper", path: "/face-swap", available: false, isPremium: true },
-        { name: "Photo Restoration", path: "/restore", available: false, isPremium: true },
-        { name: "Text to Image", path: "/text-to-image", available: false, isPremium: true },
-        { name: "Image to Text (OCR)", path: "/ocr", available: false, isPremium: true },
-        { name: "Background Blur", path: "/blur-bg", available: false, isPremium: true },
-        { name: "Watermark Remover", path: "/remove-watermark", available: false, isPremium: true },
-      ]
-    }
   ];
 
   const filteredCategories = categories.filter(category =>
@@ -335,7 +265,9 @@ const Home = () => {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-600 dark:text-gray-400">© 2024 Cyenite. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" className="text-gray-400 hover:text-gray-500"><FiGithub className="w-6 h-6" /></a>
+                <a href="https://github.com" className="text-gray-400 hover:text-gray-500" aria-label="GitHub">
+                  <FiGithub className="w-6 h-6" />
+                </a>
               </div>
             </div>
           </div>

@@ -167,12 +167,12 @@ const CircleCropper = () => {
                     <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-gray-200/50 dark:border-gray-700/50">
                         {!image ? (
                             // Dropzone
-                            <div {...getRootProps()} className="relative rounded-2xl p-12 text-center transition-all
+                            <div {...getRootProps()} className={`relative rounded-2xl p-12 text-center transition-all
                                 group hover:bg-blue-50/50 dark:hover:bg-blue-900/20
                                 before:absolute before:inset-0 before:rounded-2xl before:border-2 before:border-dashed
                                 before:pointer-events-none
-                                ${isDragActive ? 'before:border-blue-500 bg-blue-50/50 dark:bg-blue-900/20' : 
-                                'before:border-gray-300 dark:before:border-gray-600'}">
+                                ${isDragActive ? 'before:border-blue-500 bg-blue-50/50 dark:bg-blue-900/20' :
+                                    'before:border-gray-300 dark:before:border-gray-600'}`}>
                                 <div className="relative z-10">
                                     <input {...getInputProps()} />
                                     <div className="space-y-6">

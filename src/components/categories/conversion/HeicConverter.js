@@ -75,7 +75,7 @@ const HeicConverter = () => {
                 ));
             }
         });
-    }, [selectedFormat]);
+    }, [formatOptions, selectedFormat]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,

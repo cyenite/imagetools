@@ -95,12 +95,6 @@ const resizeImage = (file, config) => {
     });
 };
 
-// Add this CSS class to your global styles or use a CSS-in-JS solution
-const dotPattern = {
-    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.1) 1px, transparent 0)`,
-    backgroundSize: '20px 20px',
-};
-
 const BatchResizer = () => {
     const [files, setFiles] = useState([]);
     const [isProcessing, setIsProcessing] = useState(false);
@@ -112,7 +106,7 @@ const BatchResizer = () => {
         format: 'jpeg',
         quality: 90
     });
-    const [processedFiles, setProcessedFiles] = useState([]);
+    const [setProcessedFiles] = useState([]);
     const [progress, setProgress] = useState(0);
     const [selectedPreset, setSelectedPreset] = useState(null);
     const [originalDimensions, setOriginalDimensions] = useState(null);
@@ -262,39 +256,6 @@ const BatchResizer = () => {
                 [dimension]: numValue
             }));
         }
-    };
-
-    const PreviewMessage = () => {
-        if (!originalDimensions || !selectedPreset) return null;
-
-        const originalAspect = originalDimensions.width / originalDimensions.height;
-        const presetAspect = selectedPreset.width / selectedPreset.height;
-        const aspectDifference = Math.abs(originalAspect - presetAspect);
-
-        if (aspectDifference > 0.01) { // Show warning if aspect ratios differ significantly
-            return (
-                <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-900/30 rounded-xl text-sm">
-                    <div className="flex items-start space-x-2">
-                        <svg className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
-                        <div>
-                            <p className="text-amber-800 dark:text-amber-200">
-                                Your image will be resized to match the {selectedPreset.name} preset exactly:
-                            </p>
-                            <ul className="mt-2 space-y-1 text-amber-700 dark:text-amber-300">
-                                <li>• Original: {originalDimensions.width}×{originalDimensions.height}
-                                    ({(originalAspect).toFixed(2)} ratio)</li>
-                                <li>• After resize: {selectedPreset.width}×{selectedPreset.height}
-                                    ({(presetAspect).toFixed(2)} ratio)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-        return null;
     };
 
     return (

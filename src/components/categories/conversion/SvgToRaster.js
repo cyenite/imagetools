@@ -140,7 +140,7 @@ const SvgToRaster = () => {
                 ));
             }
         });
-    }, [selectedFormat, scaleMode, customWidth, customHeight, scaleFactor, maintainAspectRatio, formatOptions]);
+    }, [selectedFormat, formatOptions, calculateDimensions]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
