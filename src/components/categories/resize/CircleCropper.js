@@ -135,6 +135,23 @@ const CircleCropper = () => {
             {/* Background Effects */}
             <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-gray-900/50 to-transparent dark:from-gray-950/50 pointer-events-none" />
 
+            <div className="absolute inset-x-0 top-0 h-[50vh] pointer-events-none">
+                <div className="absolute inset-0 opacity-20">
+                    <div className="absolute -top-48 -left-48 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
+                    <div className="absolute -top-48 -right-48 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
+                    <div className="absolute top-[-20vh] left-[20vw] w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
+                </div>
+
+                <div
+                    className="absolute inset-0 opacity-50 dark:opacity-40"
+                    style={{
+                        backgroundImage: `radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.3) 2px, transparent 0)`,
+                        backgroundSize: '32px 32px'
+                    }}
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-gray-900/50 dark:to-gray-900" />
+            </div>
             <div className="container mx-auto px-4 py-24 relative">
                 <div className="max-w-6xl mx-auto">
                     {/* Title Section */}
