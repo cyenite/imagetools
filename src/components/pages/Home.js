@@ -17,8 +17,8 @@ const Home = () => {
       isPremium: false,
       tools: [
         { name: "HEIC Converter", path: "/categories/conversion/heic-converter", available: true },
+        { name: "Image Format Converter", path: "/categories/conversion/format-converter", available: true },
         { name: "Image to PDF", path: "/categories/conversion/image-to-pdf", available: true, isPremium: true },
-        { name: "Image to SVG", path: "/categories/conversion/image-to-svg", available: true, isPremium: true },
         { name: "SVG to PNG/JPG", path: "/categories/conversion/svg-to-raster", available: true, isPremium: true },
       ]
     },
@@ -193,7 +193,7 @@ const Home = () => {
           {filteredCategories.map((category) => (
             <div
               key={category.title}
-              onClick={() => navigate(`/category${category.path}`)}
+              onClick={() => navigate(`/categories${category.path}`)}
               className="group bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 cursor-pointer"
             >
               {/* Card Header - More compact and modern */}
