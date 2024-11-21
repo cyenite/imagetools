@@ -31,7 +31,7 @@ const Home = () => {
         { name: "Grid Cropper", path: "/categories/resize/grid-cropper", available: true, isPremium: true },
         { name: "Batch Resizer", path: "/categories/resize/batch-resize", available: true, isPremium: true },
         { name: "Crop to Circle", path: "/categories/resize/crop-circle", available: true },
-        { name: "Aspect Ratio Calculator", path: "/categories/resize/aspect-ratio", available: false },
+        { name: "Aspect Ratio Calculator", path: "/categories/resize/aspect-ratio", available: true },
       ]
     },
     {
