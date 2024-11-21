@@ -19,8 +19,8 @@ const Home = () => {
       tools: [
         { name: "HEIC Converter", path: "/categories/conversion/heic-converter", available: true },
         { name: "Image Format Converter", path: "/categories/conversion/format-converter", available: true },
-        { name: "Image to PDF", path: "/categories/conversion/image-to-pdf", available: true, isPremium: true },
-        { name: "SVG to PNG/JPG", path: "/categories/conversion/svg-to-raster", available: true, isPremium: true },
+        { name: "Image to PDF", path: "/categories/conversion/image-to-pdf", available: true },
+        { name: "SVG to PNG/JPG", path: "/categories/conversion/svg-to-raster", available: true },
       ]
     },
     {
@@ -30,7 +30,7 @@ const Home = () => {
       tools: [
         { name: "Grid Cropper", path: "/categories/resize/grid-cropper", available: true },
         { name: "Batch Resizer", path: "/categories/resize/batch-resize", available: false, isPremium: true },
-        { name: "Crop to Circle", path: "/categories/resize/crop-circle", available: false, isPremium: true },
+        { name: "Crop to Circle", path: "/categories/resize/crop-circle", available: true, isPremium: true },
         { name: "Aspect Ratio Calculator", path: "/categories/resize/aspect-ratio", available: false },
       ]
     },
