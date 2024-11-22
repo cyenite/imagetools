@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import heic2any from 'heic2any';
 import gifshot from 'gifshot';
@@ -8,16 +8,13 @@ const FormatConverter = () => {
     const [error, setError] = useState(null);
     const [selectedFormat, setSelectedFormat] = useState('image/jpeg');
 
-    const formatOptions = {
-        'image/jpeg': { ext: 'jpg', label: 'JPG', mimeType: 'image/jpeg' },
-        'image/png': { ext: 'png', label: 'PNG', mimeType: 'image/png' },
-        'image/webp': { ext: 'webp', label: 'WebP', mimeType: 'image/webp' },
-        'image/gif': { ext: 'gif', label: 'GIF', mimeType: 'image/gif' },
-        'image/bmp': { ext: 'bmp', label: 'BMP', mimeType: 'image/bmp' },
-        'image/tiff': { ext: 'tiff', label: 'TIFF', mimeType: 'image/tiff' }
-    };
+    const formatOptions = useMemo(() => ({
+        'image/jpeg': { ext: 'jpg', label: 'JPEG' },
+        'image/png': { ext: 'png', label: 'PNG' },
+        'image/webp': { ext: 'webp', label: 'WebP' }
+    }), []);
 
-    const convertImage = async (file) => {
+    const convertImage = useCallback(async (file) => {
         return new Promise((resolve, reject) => {
             if (selectedFormat === 'image/gif') {
                 gifshot.createGIF({
@@ -62,7 +59,7 @@ const FormatConverter = () => {
                 img.src = URL.createObjectURL(file);
             }
         });
-    };
+    }, [selectedFormat]);
 
     const base64ToBlob = (base64, type) => {
         const byteCharacters = atob(base64);
@@ -141,7 +138,7 @@ const FormatConverter = () => {
                 ));
             }
         });
-    }, [convertImage, formatOptions, selectedFormat]);
+    }, [selectedFormat]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,

@@ -7,7 +7,6 @@ const DpiChanger = () => {
     const [error, setError] = useState(null);
     const [targetDpi, setTargetDpi] = useState(300);
     const [preview, setPreview] = useState(null);
-    const [originalDpi, setOriginalDpi] = useState(null);
     const [currentFile, setCurrentFile] = useState(null);
 
     const processImage = useCallback(async (file) => {

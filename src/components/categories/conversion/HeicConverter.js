@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import heic2any from 'heic2any';
 
@@ -7,12 +7,12 @@ const HeicConverter = () => {
     const [error, setError] = useState(null);
     const [selectedFormat, setSelectedFormat] = useState('image/jpeg');
 
-    const formatOptions = {
-        'image/jpeg': { ext: 'jpg', label: 'JPG' },
+    const formatOptions = useMemo(() => ({
+        'image/jpeg': { ext: 'jpg', label: 'JPEG' },
         'image/png': { ext: 'png', label: 'PNG' },
         'image/webp': { ext: 'webp', label: 'WebP' },
         'image/gif': { ext: 'gif', label: 'GIF' }
-    };
+    }), []);
 
     const onDrop = useCallback(async (acceptedFiles) => {
         setError(null);

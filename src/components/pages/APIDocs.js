@@ -106,9 +106,9 @@ const APIDocs = () => {
                                 v1.0.0
                             </span>
                             <span>•</span>
-                            <a href="#" className="hover:text-blue-500 transition-colors">
+                            {/* <a href="#" className="hover:text-blue-500 transition-colors">
                                 Changelog
-                            </a>
+                            </a> */}
                         </div>
                     </div>
 

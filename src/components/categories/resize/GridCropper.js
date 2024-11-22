@@ -16,7 +16,6 @@ const GridCropper = () => {
     const [hasDownloaded, setHasDownloaded] = useState(false);
     const [showAspectWarning, setShowAspectWarning] = useState(false);
     const [showCropDialog, setShowCropDialog] = useState(false);
-    const [cropAspectRatio, setCropAspectRatio] = useState(1);
 
     const drawImage = useCallback((img) => {
         const canvas = canvasRef.current;
@@ -603,7 +602,6 @@ const GridCropper = () => {
                                             image={image}
                                             onCropComplete={handleCropComplete}
                                             onCancel={() => setShowCropDialog(false)}
-                                            aspectRatio={cropAspectRatio}
                                         />
                                     </div>
                                 </div>

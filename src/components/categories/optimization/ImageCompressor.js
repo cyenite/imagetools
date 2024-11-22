@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import imageCompression from 'browser-image-compression';
 import { saveAs } from 'file-saver';

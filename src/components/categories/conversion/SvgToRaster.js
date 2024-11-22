@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const SvgToRaster = () => {
@@ -11,37 +11,37 @@ const SvgToRaster = () => {
     const [scaleFactor, setScaleFactor] = useState(2);
     const [maintainAspectRatio, setMaintainAspectRatio] = useState(true);
 
-    const formatOptions = {
+    const formatOptions = useMemo(() => ({
         'image/png': { ext: 'png', label: 'PNG' },
-        'image/jpeg': { ext: 'jpg', label: 'JPG' }
-    };
+        'image/jpeg': { ext: 'jpg', label: 'JPEG' }
+    }), []);
 
     const handleScaleChange = (e) => {
         setScaleMode(e.target.value);
     };
 
-    const calculateDimensions = (originalWidth, originalHeight) => {
+    const calculateDimensions = useCallback((width, height, maxSize) => {
         switch (scaleMode) {
             case 'original':
-                return { width: originalWidth, height: originalHeight };
+                return { width: width, height: height };
             case 'custom':
                 if (maintainAspectRatio) {
-                    const aspectRatio = originalWidth / originalHeight;
+                    const aspectRatio = width / height;
                     return {
-                        width: customWidth,
-                        height: Math.round(customWidth / aspectRatio)
+                        width: maxSize,
+                        height: Math.round(maxSize / aspectRatio)
                     };
                 }
-                return { width: customWidth, height: customHeight };
+                return { width: maxSize, height: maxSize };
             case 'scale':
                 return {
-                    width: Math.round(originalWidth * scaleFactor),
-                    height: Math.round(originalHeight * scaleFactor)
+                    width: Math.round(width * scaleFactor),
+                    height: Math.round(height * scaleFactor)
                 };
             default:
-                return { width: originalWidth, height: originalHeight };
+                return { width: width, height: height };
         }
-    };
+    }, [scaleMode, maintainAspectRatio, scaleFactor]);
 
     const onDrop = useCallback(async (acceptedFiles) => {
         setError(null);

@@ -72,7 +72,7 @@ const ExifExtractor = () => {
             setError('Failed to extract EXIF data');
             setExifData(null);
         }
-    }, []);
+    }, [setError]);
 
     // Helper function to convert HEIC/HEIF to JPEG
     const convertHeicToJpeg = async (file) => {
@@ -121,7 +121,7 @@ const ExifExtractor = () => {
         } finally {
             setIsProcessing(false);
         }
-    }, [extractExifData]);
+    }, [extractExifData, setError]);
 
     useEffect(() => {
         return () => {
@@ -158,7 +158,7 @@ const ExifExtractor = () => {
         } finally {
             setIsProcessing(false);
         }
-    }, [image, processingOptions, isProcessing]);
+    }, [image, processingOptions, isProcessing, setError]);
 
     const handleDownload = useCallback(() => {
         if (!processedImage && !image) return;
@@ -167,7 +167,7 @@ const ExifExtractor = () => {
         const filename = image.name.replace(/\.[^/.]+$/, "");
         const extension = processingOptions.saveAsWebP ? 'webp' : fileToDownload.type.split('/')[1];
         saveAs(fileToDownload, `${filename}_processed.${extension}`);
-    }, [processedImage, image, processingOptions.saveAsWebP]);
+    }, [processedImage, image, processingOptions.saveAsWebP, setError]);
 
     // Update dropzone configuration
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
