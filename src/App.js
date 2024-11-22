@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { HelmetProvider } from 'react-helmet-async';
+import { webVitals } from './utils/webVitals';
 
 // Context
 import { ThemeProvider } from './context/ThemeContext';
@@ -43,6 +45,14 @@ ReactGA.initialize('G-SHY4VGPCW1');
 function AppContent() {
   const location = useLocation();
 
+  // Initialize web vitals
+  useEffect(() => {
+    webVitals({
+      debug: process.env.NODE_ENV === 'development'
+    });
+  }, []);
+
+  // Track page views
   useEffect(() => {
     ReactGA.send({ hitType: "pageview", page: location.pathname });
   }, [location]);
@@ -81,7 +91,7 @@ function AppContent() {
 
 function App() {
   return (
-    <>
+    <HelmetProvider>
       <Toaster
         position="top-center"
         toastOptions={{
@@ -101,7 +111,7 @@ function App() {
           <AppContent />
         </Router>
       </ThemeProvider>
-    </>
+    </HelmetProvider>
   );
 }
 

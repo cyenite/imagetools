@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import ImageCropper from './ImageCropper';
+import SEOHead from '../../common/SEOHead';
 
 const GridCropper = () => {
     const [image, setImage] = useState(null);
@@ -322,8 +323,14 @@ const GridCropper = () => {
     }, [drawImage, drawGridPreview, checkImageAspectRatio]);
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-900 pt-16 relative">
-            {/* Background Effects */}
+        <>
+            <SEOHead
+                title="Grid Cropper - Transform Images into Perfect Grid Layouts"
+                description="Transform your images into perfectly balanced grid layouts with our intuitive cropping tool"
+                canonicalUrl="/categories/resize/grid"
+            />
+            <div className="min-h-screen bg-white dark:bg-gray-900 pt-16 relative">
+                {/* Background Effects */}
             <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-gray-900/50 to-transparent dark:from-gray-950/50 pointer-events-none" />
 
             <div className="absolute inset-x-0 top-0 h-[50vh] pointer-events-none">
@@ -750,7 +757,8 @@ const GridCropper = () => {
                     </div>
                 </div>
             </div>
-        </div >
+            </div >
+        </>
     );
 };
 
