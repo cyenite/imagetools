@@ -16,6 +16,7 @@ const GridCropper = () => {
     const [hasDownloaded, setHasDownloaded] = useState(false);
     const [showAspectWarning, setShowAspectWarning] = useState(false);
     const [showCropDialog, setShowCropDialog] = useState(false);
+    const [cropAspectRatio, setCropAspectRatio] = useState(1);
 
     const drawImage = useCallback((img) => {
         const canvas = canvasRef.current;
@@ -178,18 +179,32 @@ const GridCropper = () => {
     const handleGridSizeChange = (type, value) => {
         const newValue = parseInt(value);
         setHasDownloaded(false);
-        if (isSquareGrid) {
-            setGridSize({ rows: newValue, cols: newValue });
-        } else {
-            setGridSize(prev => ({ ...prev, [type]: newValue }));
-        }
+        setGridSize(prev => ({ ...prev, [type]: newValue }));
     };
 
     const checkImageAspectRatio = useCallback((img) => {
-        const aspectRatio = img.width / img.height;
-        const isSquare = Math.abs(aspectRatio - 1) < 0.01; // Allow small deviation
-        setShowAspectWarning(!isSquare && isSquareGrid);
-    }, [isSquareGrid]);
+        if (!isSquareGrid) return;
+
+        // For a square grid, the image aspect ratio should match the grid ratio
+        const idealRatio = gridSize.cols / gridSize.rows;
+        const imageRatio = img.width / img.height;
+
+        // Allow 5% tolerance
+        const tolerance = 0.05;
+        const isProperRatio = Math.abs(imageRatio - idealRatio) < tolerance;
+
+        // For debugging
+        console.log({
+            imageWidth: img.width,
+            imageHeight: img.height,
+            imageRatio,
+            idealRatio,
+            difference: Math.abs(imageRatio - idealRatio),
+            isProperRatio
+        });
+
+        setShowAspectWarning(!isProperRatio);
+    }, [isSquareGrid, gridSize]);
 
     useEffect(() => {
         if (image) {
@@ -201,11 +216,8 @@ const GridCropper = () => {
 
     const handleSquareGridToggle = (checked) => {
         setIsSquareGrid(checked);
-        if (checked) {
-            setGridSize(prev => ({ rows: prev.rows, cols: prev.rows }));
-            if (image) {
-                checkImageAspectRatio(image);
-            }
+        if (image) {
+            checkImageAspectRatio(image);
         }
     };
 
@@ -306,8 +318,9 @@ const GridCropper = () => {
         requestAnimationFrame(() => {
             drawImage(croppedImage);
             drawGridPreview(croppedImage);
+            checkImageAspectRatio(croppedImage);
         });
-    }, [drawImage, drawGridPreview]);
+    }, [drawImage, drawGridPreview, checkImageAspectRatio]);
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900 pt-16 relative">
@@ -365,7 +378,7 @@ const GridCropper = () => {
                                         after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
                                         after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                                     <span className="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        Square Grid
+                                        Square Grids
                                     </span>
                                 </label>
                             </div>
@@ -374,7 +387,7 @@ const GridCropper = () => {
                             <div className="flex flex-wrap justify-center items-center gap-6">
                                 <div className="flex items-center gap-4">
                                     <label className="text-gray-700 dark:text-gray-300 font-medium">
-                                        {isSquareGrid ? "Grid Size:" : "Rows:"}
+                                        Rows:
                                     </label>
                                     <div className="relative">
                                         <input
@@ -391,25 +404,25 @@ const GridCropper = () => {
                                         />
                                     </div>
                                 </div>
-                                {!isSquareGrid && (
-                                    <div className="flex items-center gap-4">
-                                        <label className="text-gray-700 dark:text-gray-300 font-medium">Columns:</label>
-                                        <div className="relative">
-                                            <input
-                                                type="number"
-                                                min="1"
-                                                max="10"
-                                                value={gridSize.cols}
-                                                onChange={(e) => handleGridSizeChange('cols', e.target.value)}
-                                                className="w-24 px-4 py-2.5 bg-white dark:bg-gray-700 
-                                                    border border-gray-200 dark:border-gray-600 rounded-xl
-                                                    text-gray-700 dark:text-gray-300 
-                                                    focus:outline-none focus:ring-2 focus:ring-blue-500 
-                                                    transition-all"
-                                            />
-                                        </div>
+                                <div className="flex items-center gap-4">
+                                    <label className="text-gray-700 dark:text-gray-300 font-medium">
+                                        Columns:
+                                    </label>
+                                    <div className="relative">
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max="10"
+                                            value={gridSize.cols}
+                                            onChange={(e) => handleGridSizeChange('cols', e.target.value)}
+                                            className="w-24 px-4 py-2.5 bg-white dark:bg-gray-700 
+                                                border border-gray-200 dark:border-gray-600 rounded-xl
+                                                text-gray-700 dark:text-gray-300 
+                                                focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                                transition-all"
+                                        />
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </div>
 
@@ -546,18 +559,18 @@ const GridCropper = () => {
                                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                     </svg>
                                     <p className="text-yellow-800 dark:text-yellow-200">
-                                        Your image isn't square. For best results with square grid, consider cropping it first.
+                                        Your image proportions will result in stretched grid cells. Consider cropping for better results.
                                     </p>
                                 </div>
                                 <button
                                     onClick={() => setShowCropDialog(true)}
                                     className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 
-                                            text-white rounded-lg transition-colors duration-200 
-                                            flex items-center gap-2 text-sm"
+                                                text-white rounded-lg transition-colors duration-200 
+                                                flex items-center gap-2 text-sm"
                                 >
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4" />
                                     </svg>
                                     Crop Image
                                 </button>
@@ -571,7 +584,7 @@ const GridCropper = () => {
                                     <div className="p-4 border-b border-gray-200 dark:border-gray-700">
                                         <div className="flex justify-between items-center">
                                             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                                                Crop Image to Square
+                                                Crop Image
                                             </h3>
                                             <button
                                                 onClick={() => setShowCropDialog(false)}
@@ -590,6 +603,7 @@ const GridCropper = () => {
                                             image={image}
                                             onCropComplete={handleCropComplete}
                                             onCancel={() => setShowCropDialog(false)}
+                                            aspectRatio={cropAspectRatio}
                                         />
                                     </div>
                                 </div>
@@ -738,7 +752,7 @@ const GridCropper = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
