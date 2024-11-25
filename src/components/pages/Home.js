@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   FiImage, FiCrop, FiZap, FiEdit2, FiLayers,
-  FiPenTool, FiRefreshCw, FiSearch, FiArrowRight, FiGithub, FiStar
+  FiPenTool, FiRefreshCw, FiSearch, FiArrowRight, FiGithub, FiStar, FiCode
 } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 
@@ -45,6 +45,16 @@ const Home = () => {
       ]
     },
     {
+      title: "Developer Assets",
+      icon: <FiCode />,
+      tools: [
+        { name: "App Store Icon Generator", path: "/dev/app-icons", available: false, isPremium: true },
+        { name: "App Store Screenshot Builder", path: "/dev/screenshots", available: false, isPremium: true },
+        { name: "Feature Graphic Generator", path: "/dev/feature-graphic", available: false },
+        { name: "Favicon Generator", path: "/dev/favicon", available: false },
+      ]
+    },
+    {
       title: "Enhancement",
       icon: <FiEdit2 />,
       tools: [
@@ -81,6 +91,7 @@ const Home = () => {
         { name: "QR Code Generator", path: "/qr", available: false },
       ]
     },
+
   ];
 
   const filteredCategories = categories.filter(category =>
